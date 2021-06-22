@@ -47,7 +47,7 @@ const UserSearch = ({ username }: IUserSearchProps): JSX.Element => {
 	return (
 		<div>
 			<ol>
-				{data.edges.map((node: any) => (
+				{data.search.edges.map(({ node }: any) => (
 					<li key={node.id}>{node.login}</li>
 				))}
 			</ol>
