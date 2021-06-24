@@ -2,19 +2,19 @@ import { useRouter } from 'next/router';
 import { useQuery, gql } from '@apollo/client';
 
 const USER_SEARCH_QUERY = gql`
-	query UserDetails($username: String!) {
-		user(login: $username) {
+	query UserDetails($org: String!) {
+		organization(login: $org) {
 			name
 			login
 		}
 	}
 `;
 
-const UserPage = (): JSX.Element => {
+const OrgPage = (): JSX.Element => {
 	const router = useRouter();
-	const { username } = router.query;
+	const { org } = router.query;
 	const { loading, error, data } = useQuery(USER_SEARCH_QUERY, {
-		variables: { username },
+		variables: { org },
 	});
 
 	if (error) {
@@ -36,10 +36,10 @@ const UserPage = (): JSX.Element => {
 
 	return (
 		<div>
-			<h1>{data.user.name}</h1>
-			<p>{data.user.login}</p>
+			<h1>{data.organization.name}</h1>
+			<p>{data.organization.login}</p>
 		</div>
 	);
 };
 
-export default UserPage;
+export default OrgPage;

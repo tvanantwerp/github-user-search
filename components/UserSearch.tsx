@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
+import Link from 'next/link';
 
 const USER_SEARCH_QUERY = gql`
 	query UserSearch($username: String!) {
@@ -9,8 +10,16 @@ const USER_SEARCH_QUERY = gql`
 				cursor
 				node {
 					... on User {
-						id
 						login
+						name
+						id
+						__typename
+					}
+					... on Organization {
+						login
+						name
+						id
+						__typename
 					}
 				}
 			}
@@ -20,7 +29,7 @@ const USER_SEARCH_QUERY = gql`
 
 const UserSearch = (): JSX.Element => {
 	const [username, setUsername] = useState('');
-	const { loading, error, data, refetch } = useQuery(USER_SEARCH_QUERY, {
+	const { loading, error, data } = useQuery(USER_SEARCH_QUERY, {
 		variables: { username },
 	});
 
@@ -33,8 +42,6 @@ const UserSearch = (): JSX.Element => {
 		);
 	}
 
-	console.log(data);
-
 	return (
 		<div>
 			<input type="search" onChange={(e) => setUsername(e.target.value)} />
@@ -42,11 +49,21 @@ const UserSearch = (): JSX.Element => {
 			{loading ? (
 				<p>Loading...</p>
 			) : (
-				<ol>
-					{data.search.edges.map(({ node }: any) => (
-						<li key={node.id}>{node.login}</li>
-					))}
-				</ol>
+				<>
+					<p>{`${data.search.userCount} Results`}</p>
+					<ol>
+						{data.search.edges.map(({ node }: any) => (
+							<li key={node.id}>
+								<Link href={`/${node.__typename === 'User' ? 'user' : 'org'}/${node.login}`}>
+									<a>
+										<h2>{`${node.__typename === 'User' ? '😺' : '🏢'} ${node.name}`}</h2>
+										<p>{node.login}</p>
+									</a>
+								</Link>
+							</li>
+						))}
+					</ol>
+				</>
 			)}
 		</div>
 	);
