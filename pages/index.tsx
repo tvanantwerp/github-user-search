@@ -17,7 +17,7 @@ export default function Home() {
 					Welcome to <a href="https://nextjs.org">Next.js!</a>
 				</h1>
 
-				<UserSearch username="tom" />
+				<UserSearch />
 			</main>
 
 			<footer className={styles.footer}>

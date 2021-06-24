@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 const USER_SEARCH_QUERY = gql`
@@ -17,22 +18,12 @@ const USER_SEARCH_QUERY = gql`
 	}
 `;
 
-interface IUserSearchProps {
-	username: string;
-}
-
-const UserSearch = ({ username }: IUserSearchProps): JSX.Element => {
-	const { loading, error, data } = useQuery(USER_SEARCH_QUERY, {
+const UserSearch = (): JSX.Element => {
+	const [username, setUsername] = useState('');
+	const { loading, error, data, refetch } = useQuery(USER_SEARCH_QUERY, {
 		variables: { username },
 	});
 
-	if (loading) {
-		return (
-			<div>
-				<p>Loading...</p>
-			</div>
-		);
-	}
 	if (error) {
 		return (
 			<div>
@@ -46,11 +37,17 @@ const UserSearch = ({ username }: IUserSearchProps): JSX.Element => {
 
 	return (
 		<div>
-			<ol>
-				{data.search.edges.map(({ node }: any) => (
-					<li key={node.id}>{node.login}</li>
-				))}
-			</ol>
+			<input type="text" onChange={(e) => setUsername(e.target.value)} />
+			<p>{username}</p>
+			{loading ? (
+				<p>Loading...</p>
+			) : (
+				<ol>
+					{data.search.edges.map(({ node }: any) => (
+						<li key={node.id}>{node.login}</li>
+					))}
+				</ol>
+			)}
 		</div>
 	);
 };
