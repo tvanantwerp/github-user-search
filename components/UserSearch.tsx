@@ -37,7 +37,7 @@ const UserSearch = (): JSX.Element => {
 
 	return (
 		<div>
-			<input type="text" onChange={(e) => setUsername(e.target.value)} />
+			<input type="search" onChange={(e) => setUsername(e.target.value)} />
 			<p>{username}</p>
 			{loading ? (
 				<p>Loading...</p>
