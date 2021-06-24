@@ -56,7 +56,9 @@ const UserSearch = (): JSX.Element => {
 							<li key={node.id}>
 								<Link href={`/${node.__typename === 'User' ? 'user' : 'org'}/${node.login}`}>
 									<a>
-										<h2>{`${node.__typename === 'User' ? '😺' : '🏢'} ${node.name}`}</h2>
+										<h2>{`${node.__typename === 'User' ? '😺' : '🏢'} ${
+											node.name ? node.name : '(no name given)'
+										}`}</h2>
 										<p>{node.login}</p>
 									</a>
 								</Link>
