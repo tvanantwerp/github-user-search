@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import UserSearchResultList from 'components/UserSearchResultList';
@@ -30,14 +30,19 @@ const USER_SEARCH_QUERY = gql`
 
 const UserSearch = (): JSX.Element => {
 	const [username, setUsername] = useState('');
+	const [results, setResults] = useState<any>(null);
 	const { loading, error, data } = useQuery(USER_SEARCH_QUERY, {
 		variables: { username },
 	});
 
+	useEffect(() => {
+		if (data) setResults(data);
+	}, [data]);
+
 	if (error) {
 		return (
 			<div>
-				<p>Error!</p>
+				<h2>Error!</h2>
 				<p>{error}</p>
 			</div>
 		);
@@ -46,13 +51,10 @@ const UserSearch = (): JSX.Element => {
 	return (
 		<div>
 			<input type="search" onChange={(e) => setUsername(e.target.value)} />
-			<p>{username}</p>
-			{loading ? (
-				<p>Loading...</p>
-			) : (
+			<p>{loading ? 'Searching...' : `Found ${data.search.userCount} results.`}</p>
+			{results && (
 				<>
-					<p>{`${data.search.userCount} Results`}</p>
-					<UserSearchResultList nodes={data.search.edges} />
+					<UserSearchResultList nodes={results.search.edges} />
 				</>
 			)}
 		</div>
