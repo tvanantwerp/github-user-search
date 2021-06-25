@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import UserSearch from '../components/UserSearch';
+import UserSearch from 'components/UserSearch';
 
 export default function Home() {
 	return (
