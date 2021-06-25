@@ -33,6 +33,10 @@ const StyledUserSearchResult = styled.li`
 	img {
 		border-radius: 50%;
 	}
+
+	.username {
+		font-family: monospace;
+	}
 `;
 
 interface IUserSearchResultProps {
@@ -59,7 +63,7 @@ const UserSearchResult = ({
 					<img src={avatar} alt={`User avatar for ${username}.`} width={50} height={50} />
 					<div>
 						<h2>{`${type === 'User' ? '😺' : '🏢'} ${name ? name : '(no name given)'}`}</h2>
-						<p>{username}</p>
+						<p className="username">{username}</p>
 						<p>{`Member since ${new Date(createdAt).getFullYear()}`}</p>
 					</div>
 				</a>

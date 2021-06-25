@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 const USER_SEARCH_QUERY = gql`
 	query UserSearch($username: String!) {
-		search(query: $username, type: USER, first: 10) {
+		search(query: $username, type: USER, first: 12) {
 			userCount
 			edges {
 				cursor
