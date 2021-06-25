@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import UserSearch from 'components/UserSearch';
+import { Context } from '@apollo/client';
 
-export default function Home() {
+import client from 'apollo-client';
+import USER_SEARCH_QUERY from 'queries/UserSearchQuery';
+
+export default function Home({ data }: any) {
 	return (
 		<div>
 			<Head>
@@ -14,10 +18,21 @@ export default function Home() {
 			</Head>
 
 			<main>
-				<UserSearch />
+				<UserSearch initialData={data} />
 			</main>
 
 			<footer></footer>
 		</div>
 	);
+}
+
+export async function getStaticProps(context: Context) {
+	const username = '';
+	const { data } = await client.query({ query: USER_SEARCH_QUERY, variables: { username } });
+
+	return {
+		props: {
+			data,
+		},
+	};
 }

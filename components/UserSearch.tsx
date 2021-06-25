@@ -1,43 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 
 import UserSearchResultList from 'components/UserSearchResultList';
+import USER_SEARCH_QUERY from 'queries/UserSearchQuery';
 
-const USER_SEARCH_QUERY = gql`
-	query UserSearch($username: String!) {
-		search(query: $username, type: USER, first: 10) {
-			userCount
-			edges {
-				cursor
-				node {
-					... on User {
-						login
-						name
-						id
-						__typename
-					}
-					... on Organization {
-						login
-						name
-						id
-						__typename
-					}
-				}
-			}
-		}
-	}
-`;
-
-const UserSearch = (): JSX.Element => {
-	const [username, setUsername] = useState('');
-	const [results, setResults] = useState<any>(null);
-	const { loading, error, data } = useQuery(USER_SEARCH_QUERY, {
-		variables: { username },
-	});
+const UserSearch = ({ initialData }: any): JSX.Element => {
+	const [results, setResults] = useState<any>(initialData);
+	const [getData, { loading, error, data }] = useLazyQuery(USER_SEARCH_QUERY);
 
 	useEffect(() => {
 		if (data) setResults(data);
 	}, [data]);
+
+	console.log(data);
 
 	if (error) {
 		return (
@@ -50,8 +25,8 @@ const UserSearch = (): JSX.Element => {
 
 	return (
 		<div>
-			<input type="search" onChange={(e) => setUsername(e.target.value)} />
-			<p>{loading ? 'Searching...' : `Found ${data.search.userCount} results.`}</p>
+			<input type="search" onChange={(e) => getData({ variables: { username: e.target.value } })} />
+			<p>{loading ? 'Searching...' : `Found ${results.search.userCount} results.`}</p>
 			{results && (
 				<>
 					<UserSearchResultList nodes={results.search.edges} />

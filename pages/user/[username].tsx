@@ -1,19 +1,12 @@
 import { useRouter } from 'next/router';
 import { useQuery, gql } from '@apollo/client';
 
-const USER_SEARCH_QUERY = gql`
-	query UserDetails($username: String!) {
-		user(login: $username) {
-			name
-			login
-		}
-	}
-`;
+import USER_QUERY from 'queries/UserQuery';
 
 const UserPage = (): JSX.Element => {
 	const router = useRouter();
 	const { username } = router.query;
-	const { loading, error, data } = useQuery(USER_SEARCH_QUERY, {
+	const { loading, error, data } = useQuery(USER_QUERY, {
 		variables: { username },
 	});
 

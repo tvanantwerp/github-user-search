@@ -1,19 +1,12 @@
 import { useRouter } from 'next/router';
 import { useQuery, gql } from '@apollo/client';
 
-const USER_SEARCH_QUERY = gql`
-	query UserDetails($org: String!) {
-		organization(login: $org) {
-			name
-			login
-		}
-	}
-`;
+import ORG_QUERY from 'queries/OrgQuery';
 
 const OrgPage = (): JSX.Element => {
 	const router = useRouter();
 	const { org } = router.query;
-	const { loading, error, data } = useQuery(USER_SEARCH_QUERY, {
+	const { loading, error, data } = useQuery(ORG_QUERY, {
 		variables: { org },
 	});
 
