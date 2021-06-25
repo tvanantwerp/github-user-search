@@ -40,7 +40,7 @@ const StyledUserSearchResult = styled.li`
 `;
 
 interface IUserSearchResultProps {
-	avatar: string;
+	avatar: any;
 	createdAt: string;
 	name: string;
 	username: string;
@@ -60,7 +60,13 @@ const UserSearchResult = ({
 		<StyledUserSearchResult key={id}>
 			<Link href={`/${type === 'User' ? 'user' : 'org'}/${username}`}>
 				<a>
-					<img src={avatar} alt={`User avatar for ${username}.`} width={50} height={50} />
+					<Image
+						src={avatar}
+						alt={`User avatar for ${username}.`}
+						layout="fixed"
+						width={50}
+						height={50}
+					/>
 					<div>
 						<h2>{`${type === 'User' ? '😺' : '🏢'} ${name ? name : '(no name given)'}`}</h2>
 						<p className="username">{username}</p>

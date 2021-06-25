@@ -12,8 +12,6 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 		if (data) setResults(data);
 	}, [data]);
 
-	console.log(data);
-
 	if (error) {
 		return (
 			<div>
