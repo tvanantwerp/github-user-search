@@ -7,7 +7,6 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
 	const token = process.env.NEXT_PUBLIC_GHPAT;
-	console.log(token);
 	return {
 		headers: {
 			...headers,
