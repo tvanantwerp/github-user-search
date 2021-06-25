@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import Link from 'next/link';
+
+import UserSearchResultList from 'components/UserSearchResultList';
 
 const USER_SEARCH_QUERY = gql`
 	query UserSearch($username: String!) {
@@ -51,20 +52,7 @@ const UserSearch = (): JSX.Element => {
 			) : (
 				<>
 					<p>{`${data.search.userCount} Results`}</p>
-					<ol>
-						{data.search.edges.map(({ node }: any) => (
-							<li key={node.id}>
-								<Link href={`/${node.__typename === 'User' ? 'user' : 'org'}/${node.login}`}>
-									<a>
-										<h2>{`${node.__typename === 'User' ? '😺' : '🏢'} ${
-											node.name ? node.name : '(no name given)'
-										}`}</h2>
-										<p>{node.login}</p>
-									</a>
-								</Link>
-							</li>
-						))}
-					</ol>
+					<UserSearchResultList nodes={data.search.edges} />
 				</>
 			)}
 		</div>
