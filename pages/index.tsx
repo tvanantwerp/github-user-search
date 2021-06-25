@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import UserSearch from 'components/UserSearch';
+import UserSearch from 'components/search/UserSearch';
 import { Context } from '@apollo/client';
 
 import client from 'apollo-client';

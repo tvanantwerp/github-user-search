@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import UserSearchResult from 'components/UserSearchResult';
+import UserSearchResult from 'components/search/UserSearchResult';
 
 const StyledList = styled.ol`
 	display: grid;

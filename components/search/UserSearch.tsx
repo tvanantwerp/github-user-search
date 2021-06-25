@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 
-import UserSearchResultList from 'components/UserSearchResultList';
+import UserSearchResultList from 'components/search/UserSearchResultList';
 import USER_SEARCH_QUERY from 'queries/UserSearchQuery';
 
 const UserSearch = ({ initialData }: any): JSX.Element => {
