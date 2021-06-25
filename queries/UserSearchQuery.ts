@@ -8,12 +8,16 @@ const USER_SEARCH_QUERY = gql`
 				cursor
 				node {
 					... on User {
+						avatarUrl(size: 50)
+						createdAt
 						login
 						name
 						id
 						__typename
 					}
 					... on Organization {
+						avatarUrl(size: 50)
+						createdAt
 						login
 						name
 						id
