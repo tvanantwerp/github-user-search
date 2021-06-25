@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const StyledUserSearchResult = styled.li`
+const StyledUserSearchResult = styled.li<{ type: string }>`
 	border: 1px solid #666;
 	border-radius: 4px;
 	color: #333;
@@ -30,8 +30,24 @@ const StyledUserSearchResult = styled.li`
 		margin: 0;
 	}
 
-	img {
-		border-radius: 50%;
+	h2 {
+		font-size: 1.2rem;
+	}
+
+	.avatar {
+		align-self: center;
+		position: relative;
+
+		img {
+			border-radius: 50%;
+		}
+
+		&::after {
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			content: '${({ type }) => (type === 'User' ? '🧑' : '🏢')}';
+		}
 	}
 
 	.username {
@@ -57,18 +73,20 @@ const UserSearchResult = ({
 	type,
 }: IUserSearchResultProps): JSX.Element => {
 	return (
-		<StyledUserSearchResult key={id}>
+		<StyledUserSearchResult key={id} type={type}>
 			<Link href={`/${type === 'User' ? 'user' : 'org'}/${username}`}>
 				<a>
-					<Image
-						src={avatar}
-						alt={`User avatar for ${username}.`}
-						layout="fixed"
-						width={50}
-						height={50}
-					/>
+					<div className="avatar">
+						<Image
+							src={avatar}
+							alt={`User avatar for ${username}.`}
+							layout="fixed"
+							width={50}
+							height={50}
+						/>
+					</div>
 					<div>
-						<h2>{`${type === 'User' ? '😺' : '🏢'} ${name ? name : '(no name given)'}`}</h2>
+						<h2>{`${name ? name : '(no name given)'}`}</h2>
 						<p className="username">{username}</p>
 						<p>{`Member since ${new Date(createdAt).getFullYear()}`}</p>
 					</div>
