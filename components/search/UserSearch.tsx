@@ -5,6 +5,7 @@ import UserSearchResultList from 'components/search/UserSearchResultList';
 import USER_SEARCH_QUERY from 'queries/UserSearchQuery';
 
 const UserSearch = ({ initialData }: any): JSX.Element => {
+	const [username, setUsername] = useState('');
 	const [results, setResults] = useState<any>(initialData);
 	const [getData, { loading, error, data }] = useLazyQuery(USER_SEARCH_QUERY);
 
@@ -20,14 +21,48 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 			</div>
 		);
 	}
-
+	console.log(results.search.pageInfo);
 	return (
 		<div>
-			<input type="search" onChange={(e) => getData({ variables: { username: e.target.value } })} />
+			<input
+				type="search"
+				onChange={(e) => {
+					setUsername(e.target.value);
+					getData({ variables: { username: e.target.value } });
+				}}
+			/>
 			<p>{loading ? 'Searching...' : `Found ${results.search.userCount} results.`}</p>
 			{results && (
 				<>
 					<UserSearchResultList nodes={results.search.edges} />
+					<button
+						disabled={!results.search.pageInfo.hasPreviousPage}
+						onClick={() => {
+							getData({
+								variables: {
+									username,
+									before: results.search.pageInfo.startCursor,
+									last: 12,
+								},
+							});
+						}}
+					>
+						Previous
+					</button>
+					<button
+						disabled={!results.search.pageInfo.hasNextPage}
+						onClick={() => {
+							getData({
+								variables: {
+									username,
+									after: results.search.pageInfo.endCursor,
+									first: 12,
+								},
+							});
+						}}
+					>
+						Next
+					</button>
 				</>
 			)}
 		</div>

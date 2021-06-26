@@ -1,11 +1,23 @@
 import { gql } from '@apollo/client';
 
 const USER_SEARCH_QUERY = gql`
-	query UserSearch($username: String!) {
-		search(query: $username, type: USER, first: 12) {
+	query UserSearch($username: String!, $after: String, $before: String, $first: Int, $last: Int) {
+		search(
+			query: $username
+			type: USER
+			first: $first
+			last: $last
+			after: $after
+			before: $before
+		) {
+			pageInfo {
+				hasPreviousPage
+				hasNextPage
+				startCursor
+				endCursor
+			}
 			userCount
 			edges {
-				cursor
 				node {
 					... on User {
 						avatarUrl(size: 50)

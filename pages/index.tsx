@@ -28,7 +28,10 @@ export default function Home({ data }: any) {
 
 export async function getStaticProps(context: Context) {
 	const username = '';
-	const { data } = await client.query({ query: USER_SEARCH_QUERY, variables: { username } });
+	const { data } = await client.query({
+		query: USER_SEARCH_QUERY,
+		variables: { username, first: 12 },
+	});
 
 	return {
 		props: {
