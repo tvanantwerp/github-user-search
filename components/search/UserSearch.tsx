@@ -28,7 +28,7 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 				type="search"
 				onChange={(e) => {
 					setUsername(e.target.value);
-					getData({ variables: { username: e.target.value } });
+					getData({ variables: { username: e.target.value, first: 12 } });
 				}}
 			/>
 			<p>{loading ? 'Searching...' : `Found ${results.search.userCount} results.`}</p>
