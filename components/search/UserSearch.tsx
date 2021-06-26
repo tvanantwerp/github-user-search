@@ -11,6 +11,11 @@ const Layout = styled.div`
 	grid-gap: 1rem;
 `;
 
+const SearchStatus = styled.p`
+	font-size: 1.2rem;
+	text-align: center;
+`;
+
 const SearchInput = styled.input`
 	border: 3px solid #333;
 	border-radius: 20px;
@@ -30,7 +35,6 @@ const PaginationButton = styled.button`
 	color: #333;
 	cursor: pointer;
 	font-weight: 400;
-	min-width: 200px;
 	padding: 0.5rem 1rem;
 	transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out;
 
@@ -84,7 +88,9 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 					setUsername(e.target.value);
 				}}
 			/>
-			<p>{loading ? 'Searching...' : `Found ${results.search.userCount} results.`}</p>
+			<SearchStatus>
+				{loading ? 'Searching...' : `Found ${results.search.userCount} results.`}
+			</SearchStatus>
 			{results && (
 				<>
 					<UserSearchResultList nodes={results.search.edges} />
