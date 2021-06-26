@@ -1,7 +1,8 @@
 import { useEffect, useCallback, DependencyList } from 'react';
 
 export const useDebounce = (theFunction: any, deps: DependencyList, time: number): void => {
-	const callback = useCallback(theFunction, [...deps, theFunction]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const callback = useCallback(theFunction, deps);
 
 	useEffect(() => {
 		const timer = setTimeout(callback, time);
