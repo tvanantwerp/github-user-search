@@ -2,6 +2,49 @@ import { createGlobalStyle } from 'styled-components';
 
 // Includes CSS reset from https://piccalil.li/blog/a-modern-css-reset/
 const GlobalStyle = createGlobalStyle`
+/* nunito-regular - latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/nunito-v16-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('/fonts/nunito-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/nunito-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/nunito-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/nunito-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/nunito-v16-latin-regular.svg#Nunito') format('svg'); /* Legacy iOS */
+}
+
+/* nunito-italic - latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/fonts/nunito-v16-latin-italic.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('/fonts/nunito-v16-latin-italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/nunito-v16-latin-italic.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/nunito-v16-latin-italic.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/nunito-v16-latin-italic.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/nunito-v16-latin-italic.svg#Nunito') format('svg'); /* Legacy iOS */
+}
+
+/* nunito-700 - latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/nunito-v16-latin-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('/fonts/nunito-v16-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/nunito-v16-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/nunito-v16-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/nunito-v16-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/nunito-v16-latin-700.svg#Nunito') format('svg'); /* Legacy iOS */
+}
+
+
 /* Box sizing rules */
 *,
 *::before,
@@ -79,7 +122,7 @@ select {
 
 // Begin custom styles
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI",
                 Roboto, Oxygen-Sans, Ubuntu, Cantarell,
                 "Helvetica Neue", sans-serif;
   margin: 0 auto;
