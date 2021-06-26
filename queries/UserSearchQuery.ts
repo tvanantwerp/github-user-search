@@ -20,7 +20,7 @@ const USER_SEARCH_QUERY = gql`
 			edges {
 				node {
 					... on User {
-						avatarUrl(size: 50)
+						avatarUrl(size: 100)
 						createdAt
 						login
 						name
@@ -28,7 +28,7 @@ const USER_SEARCH_QUERY = gql`
 						__typename
 					}
 					... on Organization {
-						avatarUrl(size: 50)
+						avatarUrl(size: 100)
 						createdAt
 						login
 						name

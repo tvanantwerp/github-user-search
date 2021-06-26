@@ -1,9 +1,53 @@
 import { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
+import styled from 'styled-components';
 
 import UserSearchResultList from 'components/search/UserSearchResultList';
 import USER_SEARCH_QUERY from 'queries/UserSearchQuery';
 import useDebounce from 'components/hooks/useDebounce';
+
+const Layout = styled.div`
+	display: grid;
+	grid-gap: 1rem;
+`;
+
+const SearchInput = styled.input`
+	border: 3px solid #333;
+	border-radius: 20px;
+	padding: 0.5rem 1rem;
+`;
+
+const PaginationContainer = styled.div`
+	display: grid;
+	grid-gap: 1rem;
+	grid-template: auto / repeat(2, 1fr);
+`;
+
+const PaginationButton = styled.button`
+	background-color: rgb(255, 255, 255);
+	border: 3px solid #333;
+	border-radius: 20px;
+	color: #333;
+	cursor: pointer;
+	font-weight: 400;
+	min-width: 200px;
+	padding: 0.5rem 1rem;
+	transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+	&:disabled,
+	&:disabled:hover {
+		background-color: #ccc;
+		border-color: #666;
+		cursor: not-allowed;
+		font-weight: 400;
+		text-decoration: line-through;
+	}
+
+	&:hover {
+		background-color: rgb(139, 185, 151);
+		font-weight: 700;
+	}
+`;
 
 const UserSearch = ({ initialData }: any): JSX.Element => {
 	const [username, setUsername] = useState('');
@@ -32,9 +76,10 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 	}
 
 	return (
-		<div>
-			<input
+		<Layout>
+			<SearchInput
 				type="search"
+				placeholder="Search for username..."
 				onChange={(e) => {
 					setUsername(e.target.value);
 				}}
@@ -43,37 +88,39 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 			{results && (
 				<>
 					<UserSearchResultList nodes={results.search.edges} />
-					<button
-						disabled={!results.search.pageInfo.hasPreviousPage}
-						onClick={() => {
-							getData({
-								variables: {
-									username,
-									before: results.search.pageInfo.startCursor,
-									last: 12,
-								},
-							});
-						}}
-					>
-						Previous
-					</button>
-					<button
-						disabled={!results.search.pageInfo.hasNextPage}
-						onClick={() => {
-							getData({
-								variables: {
-									username,
-									after: results.search.pageInfo.endCursor,
-									first: 12,
-								},
-							});
-						}}
-					>
-						Next
-					</button>
+					<PaginationContainer>
+						<PaginationButton
+							disabled={!results.search.pageInfo.hasPreviousPage}
+							onClick={() => {
+								getData({
+									variables: {
+										username,
+										before: results.search.pageInfo.startCursor,
+										last: 12,
+									},
+								});
+							}}
+						>
+							Previous
+						</PaginationButton>
+						<PaginationButton
+							disabled={!results.search.pageInfo.hasNextPage}
+							onClick={() => {
+								getData({
+									variables: {
+										username,
+										after: results.search.pageInfo.endCursor,
+										first: 12,
+									},
+								});
+							}}
+						>
+							Next
+						</PaginationButton>
+					</PaginationContainer>
 				</>
 			)}
-		</div>
+		</Layout>
 	);
 };
 

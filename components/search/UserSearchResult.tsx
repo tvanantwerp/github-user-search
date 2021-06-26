@@ -3,15 +3,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const StyledUserSearchResult = styled.li<{ type: string }>`
-	border: 1px solid #666;
-	border-radius: 4px;
+	background-color: rgb(255, 255, 255);
+	border: 3px solid #666;
+	border-radius: 20px;
 	color: #333;
 	list-style: none;
 	text-decoration: none;
 	transform: scale(1);
-	transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
 
 	&:hover {
+		background-color: rgb(120, 201, 241);
 		color: #444;
 		transform: scale(1.05);
 	}
@@ -19,8 +21,7 @@ const StyledUserSearchResult = styled.li<{ type: string }>`
 	a {
 		color: inherit;
 		display: grid;
-		grid-gap: 10px;
-		grid-template: auto / 50px 1fr;
+		justify-items: center;
 		padding: 1rem;
 		text-decoration: none;
 	}
@@ -35,10 +36,10 @@ const StyledUserSearchResult = styled.li<{ type: string }>`
 	}
 
 	.avatar {
-		align-self: center;
 		position: relative;
 
 		img {
+			border: 5px solid rgb(237, 188, 88) !important;
 			border-radius: 50%;
 		}
 
@@ -47,11 +48,17 @@ const StyledUserSearchResult = styled.li<{ type: string }>`
 			right: 0;
 			position: absolute;
 			content: '${({ type }) => (type === 'User' ? '🧑' : '🏢')}';
+			font-size: 2rem;
 		}
 	}
 
 	.username {
 		font-family: monospace;
+	}
+
+	.no-name {
+		color: #666;
+		font-style: italic;
 	}
 `;
 
@@ -81,15 +88,13 @@ const UserSearchResult = ({
 							src={avatar}
 							alt={`User avatar for ${username}.`}
 							layout="fixed"
-							width={50}
-							height={50}
+							width={100}
+							height={100}
 						/>
 					</div>
-					<div>
-						<h2>{`${name ? name : '(no name given)'}`}</h2>
-						<p className="username">{username}</p>
-						<p>{`Member since ${new Date(createdAt).getFullYear()}`}</p>
-					</div>
+					<h2 className={name ? '' : 'no-name'}>{name ? name : 'No name?!?!'}</h2>
+					<p className="username">{username}</p>
+					<p>{`Member since ${new Date(createdAt).getFullYear()}`}</p>
 				</a>
 			</Link>
 		</StyledUserSearchResult>

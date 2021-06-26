@@ -82,6 +82,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                 Roboto, Oxygen-Sans, Ubuntu, Cantarell,
                 "Helvetica Neue", sans-serif;
+  margin: 0 auto;
+  max-width: 1024px;
   padding: 1rem;
 }
 `;
