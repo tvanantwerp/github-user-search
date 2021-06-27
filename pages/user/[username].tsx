@@ -5,6 +5,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 import USER_QUERY from 'queries/UserQuery';
+import Loading from 'components/Loading';
 
 function formatDate(date: string): string {
 	return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date));
@@ -48,9 +49,9 @@ const UserPage = (): JSX.Element => {
 
 	if (loading) {
 		return (
-			<div>
+			<Loading>
 				<p>Loading...</p>
-			</div>
+			</Loading>
 		);
 	}
 
