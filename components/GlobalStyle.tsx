@@ -131,9 +131,14 @@ body {
 }
 
 a {
-  color: rgb(237, 145, 143);
+  color: rgb(238, 130, 145);
   font-weight: 700;
   text-decoration: none;
+  transition: color 0.15s ease-in-out;
+
+  &:hover {
+    color: rgb(150, 228, 214);
+  }
 }
 `;
 

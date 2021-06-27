@@ -8,11 +8,11 @@ const StyledHeader = styled.header`
 	a {
 		color: #333;
 		text-decoration: none;
+		transition: color 0.15s ease-in-out;
 
-		&::active,
-		&::hover,
-		&:visited {
-			color: #333;
+		&:active,
+		&:hover {
+			color: #777;
 		}
 
 		h1 {

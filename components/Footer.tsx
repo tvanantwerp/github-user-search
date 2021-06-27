@@ -12,8 +12,8 @@ const StyledFooter = styled.footer`
 		color: #333;
 		text-decoration: none;
 
-		&::active,
-		&::hover,
+		&:active,
+		&:hover,
 		&:visited {
 			color: #333;
 		}

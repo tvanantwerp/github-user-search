@@ -24,6 +24,10 @@ const StyledUserSearchResult = styled.li<{ type: string }>`
 		justify-items: center;
 		padding: 1rem;
 		text-decoration: none;
+
+		&:hover {
+			color: inherit;
+		}
 	}
 
 	h2,
