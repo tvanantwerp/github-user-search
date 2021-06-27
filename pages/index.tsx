@@ -6,11 +6,9 @@ import USER_SEARCH_QUERY from 'queries/UserSearchQuery';
 
 export default function Home({ data }: any) {
 	return (
-		<div>
-			<main>
-				<UserSearch initialData={data} />
-			</main>
-		</div>
+		<main>
+			<UserSearch initialData={data} />
+		</main>
 	);
 }
 

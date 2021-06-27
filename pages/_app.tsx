@@ -4,6 +4,8 @@ import { ApolloProvider } from '@apollo/client';
 import client from '../apollo-client';
 
 import GlobalStyle from 'components/GlobalStyle';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -23,7 +25,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<meta name="theme-color" content="#ffffff" />
 			</Head>
 			<GlobalStyle />
+			<Header />
 			<Component {...pageProps} />
+			<Footer />
 		</ApolloProvider>
 	);
 }
