@@ -6,24 +6,18 @@ import styled from 'styled-components';
 
 import USER_QUERY from 'queries/UserQuery';
 import Loading from 'components/Loading';
+import { ButtonLink } from 'components/ui/Button';
+import Heading from 'components/ui/Heading';
+import HR from 'components/ui/HR';
+import UserContainer from 'components/ui/UserContainer';
 
 function formatDate(date: string): string {
 	return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date));
 }
 
-const UserContainer = styled.div`
+const Container = styled.div`
 	display: grid;
 	grid-gap: 1rem;
-
-	@media (min-width: 500px) {
-		grid-template-columns: 300px 1fr;
-		grid-gap: 2rem;
-	}
-
-	img {
-		border: 3px solid #333 !important;
-		border-radius: 20px;
-	}
 `;
 
 const DetailsContainer = styled.div`
@@ -58,12 +52,13 @@ const UserPage = (): JSX.Element => {
 	const name = data.user.name ? data.user.name : data.user.login;
 
 	return (
-		<div>
+		<Container>
 			<Head>
 				<title>{`${name} | GitHub User Search`}</title>
 				<meta name="description" content={`Data about ${data.user.login} on GitHub.`} />
 			</Head>
-			<h1 style={{ marginBottom: '2rem' }}>{name}</h1>
+			<Heading>{name}</Heading>
+			<HR />
 			<UserContainer>
 				<div>
 					<Image
@@ -153,7 +148,10 @@ const UserPage = (): JSX.Element => {
 					</div>
 				</DetailsContainer>
 			</UserContainer>
-		</div>
+			<ButtonLink href={data.user.url} target="_blank" rel="noopener noreferrer">
+				See GitHub Profile
+			</ButtonLink>
+		</Container>
 	);
 };
 

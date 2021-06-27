@@ -5,37 +5,18 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 import ORG_QUERY from 'queries/OrgQuery';
+import { ButtonLink } from 'components/ui/Button';
+import Heading from 'components/ui/Heading';
+import HR from 'components/ui/HR';
+import UserContainer from 'components/ui/UserContainer';
 
 function formatDate(date: string): string {
 	return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date));
 }
 
-const Heading = styled.h1`
-	margin: 0;
-	padding: 1rem 0;
-	text-align: center;
-`;
-
-const HR = styled.hr`
-	border: 1.5px solid #333;
-	border-radius: 3px;
-	height: 0;
-	margin: 0 0 2rem;
-`;
-
-const UserContainer = styled.div`
+const Container = styled.div`
 	display: grid;
 	grid-gap: 1rem;
-
-	@media (min-width: 500px) {
-		grid-template-columns: 300px 1fr;
-		grid-gap: 2rem;
-	}
-
-	img {
-		border: 3px solid #333 !important;
-		border-radius: 20px;
-	}
 `;
 
 const DetailsContainer = styled.div`
@@ -69,7 +50,7 @@ const OrgPage = (): JSX.Element => {
 	const name = data.organization.name ? data.organization.name : data.organization.login;
 
 	return (
-		<div>
+		<Container>
 			<Head>
 				<title>{`${name} | GitHub User Search`}</title>
 				<meta name="description" content={`Data about ${data.organization.login} on GitHub.`} />
@@ -151,7 +132,10 @@ const OrgPage = (): JSX.Element => {
 					</div>
 				</DetailsContainer>
 			</UserContainer>
-		</div>
+			<ButtonLink href={data.organization.url} target="_blank" rel="noopener noreferrer">
+				See GitHub Profile
+			</ButtonLink>
+		</Container>
 	);
 };
 

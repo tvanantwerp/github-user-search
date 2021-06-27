@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import UserSearchResultList from 'components/search/UserSearchResultList';
 import USER_SEARCH_QUERY from 'queries/UserSearchQuery';
 import useDebounce from 'components/hooks/useDebounce';
+import Button from 'components/ui/Button';
 
 const Layout = styled.div`
 	display: grid;
@@ -26,31 +27,6 @@ const PaginationContainer = styled.div`
 	display: grid;
 	grid-gap: 1rem;
 	grid-template: auto / repeat(2, 1fr);
-`;
-
-const PaginationButton = styled.button`
-	background-color: rgb(255, 255, 255);
-	border: 3px solid #333;
-	border-radius: 20px;
-	color: #333;
-	cursor: pointer;
-	font-weight: 400;
-	padding: 0.5rem 1rem;
-	transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out;
-
-	&:disabled,
-	&:disabled:hover {
-		background-color: #ccc;
-		border-color: #666;
-		cursor: not-allowed;
-		font-weight: 400;
-		text-decoration: line-through;
-	}
-
-	&:hover {
-		background-color: rgb(139, 185, 151);
-		font-weight: 700;
-	}
 `;
 
 const UserSearch = ({ initialData }: any): JSX.Element => {
@@ -95,7 +71,7 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 				<>
 					<UserSearchResultList nodes={results.search.edges} />
 					<PaginationContainer>
-						<PaginationButton
+						<Button
 							disabled={!results.search.pageInfo.hasPreviousPage}
 							onClick={() => {
 								getData({
@@ -108,8 +84,8 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 							}}
 						>
 							Previous
-						</PaginationButton>
-						<PaginationButton
+						</Button>
+						<Button
 							disabled={!results.search.pageInfo.hasNextPage}
 							onClick={() => {
 								getData({
@@ -122,7 +98,7 @@ const UserSearch = ({ initialData }: any): JSX.Element => {
 							}}
 						>
 							Next
-						</PaginationButton>
+						</Button>
 					</PaginationContainer>
 				</>
 			)}
