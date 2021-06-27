@@ -15,3 +15,7 @@ While Next.js has some very useful server-side generation abilities, this app do
 A user's details can be viewed at `/user/:username`, which is linked to from the individual search results.
 
 Contribution history queries cannot exceed a year's worth of time, so only the latest year is currently displayed. I may update this to simply query every possible year separately, but it's not so terribly important right now.
+
+## Aesthetics
+
+Design inspired by [each](https://dribbble.com/shots/15841277-Health-Monitoring-App) [of](https://dribbble.com/shots/15804498-SmartHome-App-Platform) [these](https://dribbble.com/shots/15797237-Health-Monitoring-App) three Dribbble shots.
