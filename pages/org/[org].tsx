@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-import Image from 'next/image';
 import styled from 'styled-components';
 
 import ORG_QUERY from 'queries/OrgQuery';
@@ -59,7 +58,8 @@ const OrgPage = (): JSX.Element => {
 			<HR />
 			<UserContainer>
 				<div>
-					<Image
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
 						src={data.organization.avatarUrl}
 						alt={`User avatar for ${data.organization.login}.`}
 						width={300}

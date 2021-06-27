@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const StyledUserSearchResult = styled.li<{ type: string }>`
 	background-color: rgb(255, 255, 255);
@@ -88,13 +87,8 @@ const UserSearchResult = ({
 			<Link href={`/${type === 'User' ? 'user' : 'org'}/${username}`}>
 				<a>
 					<div className="avatar">
-						<Image
-							src={avatar}
-							alt={`User avatar for ${username}.`}
-							layout="fixed"
-							width={100}
-							height={100}
-						/>
+						{/* eslint-disable-next-line @next/next/no-img-element */}
+						<img src={avatar} alt={`User avatar for ${username}.`} width={100} height={100} />
 					</div>
 					<h2 className={name ? '' : 'no-name'}>{name ? name : 'No name?!?!'}</h2>
 					<p className="username">{username}</p>

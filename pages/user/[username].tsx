@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-import Image from 'next/image';
 import styled from 'styled-components';
 
 import USER_QUERY from 'queries/UserQuery';
@@ -61,7 +60,8 @@ const UserPage = (): JSX.Element => {
 			<HR />
 			<UserContainer>
 				<div>
-					<Image
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
 						src={data.user.avatarUrl}
 						alt={`User avatar for ${data.user.login}.`}
 						width={300}
