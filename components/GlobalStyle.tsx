@@ -129,6 +129,12 @@ body {
   max-width: 1024px;
   padding: 1rem;
 }
+
+a {
+  color: rgb(237, 145, 143);
+  font-weight: 700;
+  text-decoration: none;
+}
 `;
 
 export default GlobalStyle;

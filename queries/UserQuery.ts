@@ -6,6 +6,7 @@ const USER_QUERY = gql`
 			id
 			login
 			name
+			url
 			avatarUrl
 			bio
 			createdAt
