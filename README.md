@@ -1,6 +1,6 @@
 # GitHub User Search
 
-This is a [Next.js](https://nextjs.org) app that uses [Apollo](https://www.apollographql.com) to query [GitHub](https://github.com)'s [GraphQL API](https://docs.github.com/en/graphql/overview/explorer) to search for users and organizations.
+This is a [Next.js](https://nextjs.org) app that uses [Apollo](https://www.apollographql.com) to query [GitHub](https://github.com)'s [GraphQL API](https://docs.github.com/en/graphql/overview/explorer) to search for users and organizations. See it in action [here](https://tva-github-user-search.netlify.app/).
 
 ## Authentication
 
