@@ -2,10 +2,19 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/client';
 import client from '../apollo-client';
+import styled from 'styled-components';
 
 import GlobalStyle from 'components/GlobalStyle';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+
+const Container = styled.div`
+	background-color: #fff;
+	border: 3px solid #ddd;
+	border-radius: 20px;
+	min-height: 100%;
+	padding: 1rem;
+`;
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -25,9 +34,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<meta name="theme-color" content="#ffffff" />
 			</Head>
 			<GlobalStyle />
-			<Header />
-			<Component {...pageProps} />
-			<Footer />
+			<Container>
+				<Header />
+				<Component {...pageProps} />
+				<Footer />
+			</Container>
 		</ApolloProvider>
 	);
 }

@@ -120,6 +120,12 @@ select {
   }
 }
 
+html {
+  background-color: #fff;
+  background-image: url('/background.svg');
+  background-size: cover;
+}
+
 // Begin custom styles
 body {
   font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI",
